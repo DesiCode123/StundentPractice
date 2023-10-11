@@ -7,14 +7,23 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
 
+@Controller
+//@RequestController
 public class StudentController {
     @Autowired
     private NewStudentService newStudentService;
+
+    @GetMapping("/getAllStudents")
+    public List<NewStudent> getAllStud(){
+        return newStudentService.getAllStudents();
+
+    }
 
     @PostMapping("/saveAll")
     public ResponseEntity<NewStudent> saveStudent(@Valid @RequestBody NewStudent student){
@@ -23,9 +32,10 @@ public class StudentController {
     }
     @GetMapping("/testFrontend")
     public String testingMessege(Model model){
-        System.out.println("hello world");
-
+        model.addAttribute("message", "Hello World");
+        return "student";
     }
+
 
 
     @PutMapping("/updateStudent/{newStudentId}")

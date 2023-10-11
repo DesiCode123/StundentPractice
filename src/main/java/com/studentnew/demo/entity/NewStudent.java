@@ -75,4 +75,16 @@ public class NewStudent {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public NewStudent(Long newStudentId, String firstName, String lastName, String email, String phoneNumber, Adress address) {
+        this.newStudentId = newStudentId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+    public NewStudent(){
+
+    }
 }

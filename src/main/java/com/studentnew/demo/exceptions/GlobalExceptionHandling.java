@@ -16,5 +16,9 @@ public class GlobalExceptionHandling {
     public ResponseEntity<Object> handleBadRequestException(BadRequestException badRequestException){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(badRequestException.getMessage());
     }
+    @ExceptionHandler({DuplicateEntityException.class})
+    public ResponseEntity<Object> handleDuplicateEntityException(DuplicateEntityException duplicateEntityException){
+        return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(duplicateEntityException.getMessage());
+    }
     //duplicate,aleradyexist
 }

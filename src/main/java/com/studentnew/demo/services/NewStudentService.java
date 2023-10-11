@@ -2,6 +2,7 @@ package com.studentnew.demo.services;
 
 import com.studentnew.demo.entity.NewStudent;
 
+import com.studentnew.demo.exceptions.DuplicateEntityException;
 import com.studentnew.demo.exceptions.StudentNotFoundException;
 import com.studentnew.demo.repository.NewStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class NewStudentService {
     }
 
     public List<NewStudent> getAllStudents(){
+
         return newStudentRepository.findAll();
     }
 
@@ -28,6 +30,13 @@ public class NewStudentService {
         Optional<NewStudent> existingStudentOpt = newStudentRepository.findById(newStudentId);
         if (existingStudentOpt.isPresent()) {
             NewStudent existingStudent = existingStudentOpt.get();
+            if(existingStudent.getFirstName().equals(student.getFirstName()) && existingStudent.getLastName().equals(student.getLastName())){
+                throw new DuplicateEntityException("The provided name is already exist");
+            }
+            if(existingStudent.getEmail().equals(student.getEmail()) && existingStudent.getPhoneNumber().equals(student.getPhoneNumber())){
+                throw new DuplicateEntityException("The email adress and phone nr is already exist");
+            }
+
             // Oppdater eksisterende student med verdier fra den innsendte studenten
             existingStudent.setFirstName(student.getFirstName());
             existingStudent.setLastName(student.getLastName());
@@ -37,6 +46,7 @@ public class NewStudentService {
             // Gjør dette for alle andre felter...
             return newStudentRepository.save(existingStudent);
         }
+
         // Håndter tilfellet hvor studenten ikke finnes...
         throw new StudentNotFoundException("Student not found with ID: " + newStudentId);
 

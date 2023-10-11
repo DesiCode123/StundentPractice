@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+   <!--<link rel="stylesheet" th:href="@{css/style.css}" />-->
+
+
+    <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <link rel="stylesheet" th:href="@{css/styles.css}" />
+
+
+    <!-- Optional JavaScript; Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <title>Student Info</title>
+
 </head>
 <body>
+<div class="container mt-5">
 <h2>Student Information</h2>
-<p th:text="${student.firstName}"></p>
-
-<p>Last Name: <span th:text="${student.lastName}"></span></p>
-<!-- Flere felter her... -->
+<p th:text="${message}"></p>
+</div>
 </body>
 </html>
